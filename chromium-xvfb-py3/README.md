@@ -22,4 +22,4 @@
 
 # 这儿有一个已经将Chromeium打包好的镜像，可基于此二次打包
 
-#docker pull thsheep/chromium-xvfb-scrapy-py3:V1
+### docker push thsheep/chromium-xvfb-scrapy-py3:V1
