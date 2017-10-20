@@ -1,15 +1,25 @@
 FROM markadams/chromium-xvfb:latest
 MAINTAINER Gtao@you_tell.me
+MAINTAINER Lucas Costa <lucas@lucascosta.com>
+
+# python/3.6/Dockerfile from https://github.com/docker-library/python
+
+# ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
+
+# http://bugs.python.org/issue19846
+# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
-RUN apt-get update && \
-    apt-get update && apt-get install -y --no-install-recommends \
+
+# runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
 		tcl \
 		tk \
-		wget \
 	&& rm -rf /var/lib/apt/lists/*
+
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
-ENV PYTHON_VERSION 3.6.0
+ENV PYTHON_VERSION 3.6.1
+
 RUN set -ex \
 	&& buildDeps=' \
 		dpkg-dev \
