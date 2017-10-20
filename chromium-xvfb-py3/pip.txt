@@ -1,0 +1,11 @@
+scrapy
+wheel
+scrapy-redis
+scrapy-splash
+pika
+requests
+redis
+selenium
+pyscreenshot
+entrypoint2
+pyvirtualdisplay

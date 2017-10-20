@@ -2,6 +2,7 @@ FROM markadams/chromium-xvfb:latest
 MAINTAINER Gtao@you_tell.me
 ENV PATH /usr/local/bin:$PATH
 ENV LANG C.UTF-8
+COPY ./pip.txt /tmp/pip.txt
 RUN apt-get update && \
     apt-get update && apt-get install -y --no-install-recommends \
 		tcl \
@@ -10,6 +11,9 @@ RUN apt-get update && \
 		gcc \
 		openssl \
 		libssl-dev \
+		curl \
+		unzip \
+		libgconf-2-4 \
 	&& rm -rf /var/lib/apt/lists/*
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
 ENV PYTHON_VERSION 3.6.0
@@ -81,5 +85,12 @@ RUN set -ex; \
 			\( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
 		\) -exec rm -rf '{}' +; \
 	rm -f get-pip.py
+ENV CHROMEDRIVER_VERSION 2.29
+ENV CHROMEDRIVER_SHA256 bb2cf08f2c213f061d6fbca9658fc44a367c1ba7e40b3ee1e3ae437be0f901c2
+RUN curl -SLO "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip" \
+  && echo "$CHROMEDRIVER_SHA256  chromedriver_linux64.zip" | sha256sum -c - \
+  && unzip "chromedriver_linux64.zip" -d /usr/local/bin \
+  && rm "chromedriver_linux64.zip" \
+  && pip install -r /tmp/pip.txt \
 
-CMD ["python3"]
+CMD ["python3", "--version"]
