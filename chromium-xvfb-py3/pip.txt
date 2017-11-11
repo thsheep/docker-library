@@ -1,3 +1,4 @@
+newspaper3k
 scrapy
 wheel
 scrapy-redis
@@ -6,6 +7,6 @@ pika
 requests
 redis
 selenium
-pyscreenshot
-entrypoint2
-pyvirtualdisplay
+redis
+Flask
+BeautifulSoup4

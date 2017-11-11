@@ -92,5 +92,8 @@ RUN curl -SLO "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION
   && unzip "chromedriver_linux64.zip" -d /usr/local/bin \
   && rm "chromedriver_linux64.zip" \
   && pip install -r /tmp/pip.txt \
+  && mkdir /var/log/spider \
+  && rm -rf  /tmp/pip.txt
+VOLUME ["/var/log/spider"]
 
 CMD ["python3", "--version"]
